@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Descriptive Analytics</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        h1 {
+            color: #4CAF50;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        table, th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Descriptive Analytics Dashboard</h1>
+
+    <h2>Summary</h2>
+    <p><strong>Total Sales:</strong> ${{ data.total_sales }}</p>
+    <p><strong>Average Sales per Month:</strong> ${{ data.avg_sales }}</p>
+    <p><strong>Total Customers:</strong> {{ data.total_customers }}</p>
+    <p><strong>Average Customers per Month:</strong> {{ data.avg_customers }}</p>
+
+    <h2>Monthly Sales Data</h2>
+    <table>
+        <tr>
+            <th>Month</th>
+            <th>Sales ($)</th>
+            <th>Customers</th>
+        </tr>
+        {% for row in data.monthly_data %}
+        <tr>
+            <td>{{ row['Month'] }}</td>
+            <td>${{ row['Sales'] }}</td>
+            <td>{{ row['Customers'] }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+
+</body>
+</html>
