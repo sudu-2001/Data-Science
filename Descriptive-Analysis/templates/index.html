@@ -31,8 +31,8 @@
     <h2>Summary</h2>
     <p><strong>Total Sales:</strong> ${{ data.total_sales }}</p>
     <p><strong>Average Sales per Month:</strong> ${{ data.avg_sales }}</p>
-    <p><strong>Total Customers:</strong> {{ data.total_customers }}</p>
-    <p><strong>Average Customers per Month:</strong> {{ data.avg_customers }}</p>
+    <p><strong>Total Customers:</strong> ${{ data.total_customers }}</p>
+    <p><strong>Average Customers per Month:</strong> ${{ data.avg_customers }}</p>
 
     <h2>Monthly Sales Data</h2>
     <table>
@@ -43,9 +43,9 @@
         </tr>
         {% for row in data.monthly_data %}
         <tr>
-            <td>{{ row['Month'] }}</td>
+            <td>${{ row['Month'] }}</td>
             <td>${{ row['Sales'] }}</td>
-            <td>{{ row['Customers'] }}</td>
+            <td>${{ row['Customers'] }}</td>
         </tr>
         {% endfor %}
     </table>

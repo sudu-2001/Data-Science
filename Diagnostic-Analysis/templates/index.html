@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diagnostic Analytics Dashboard</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: Arial, sans-serif; color: #333; background-color: #f4f4f9; padding: 20px; }
+        h1, h2 { color: #2c3e50; margin-bottom: 10px; font-weight: bold; }
+        h1 { text-align: center; font-size: 2.5em; margin-top: 10px; }
+        h2 { font-size: 1.8em; margin-top: 20px; padding-bottom: 5px; border-bottom: 2px solid #3498db; }
+        ul { list-style: none; margin-top: 15px; padding: 0; }
+        li { padding: 10px; background-color: #ffffff; margin-bottom: 10px; border-radius: 8px; box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); display: flex; justify-content: space-between; font-size: 1.1em; }
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+        th, td { padding: 10px; text-align: left; border: 1px solid #ddd; }
+        th { background-color: #3498db; color: white; }
+        @media (max-width: 600px) { h1 { font-size: 2em; } h2 { font-size: 1.5em; } }
+    </style>
+</head>
+<body>
+    <h1>Diagnostic Analytics Dashboard</h1>
+
+    <section>
+        <h2>Sales by Region</h2>
+        <ul>
+            {% for region, sales in sales_by_region.items() %}
+                <li>
+                    <span>{{ region }}</span> 
+                    <span>${{ sales | round(2) }}</span>
+                </li>
+            {% endfor %}
+        </ul>
+    </section>
+
+    <section>
+        <h2>Sales by Category</h2>
+        <ul>
+            {% for category, sales in sales_by_category.items() %}
+                <li>
+                    <span>{{ category }}</span> 
+                    <span>${{ sales | round(2) }}</span>
+                </li>
+            {% endfor %}
+        </ul>
+    </section>
+
+    <section>
+        <h2>Average Discount by Region</h2>
+        <ul>
+            {% for region, discount in sales_by_discount.items() %}
+                <li>
+                    <span>{{ region }}</span> 
+                    <span>{{ discount | round(2) }}%</span>
+                </li>
+            {% endfor %}
+        </ul>
+    </section>
+
+    <section>
+        <h2>Sales by Region and Category</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Region</th>
+                    {% for category in sales_by_category.keys() %}
+                        <th>{{ category }}</th>
+                    {% endfor %}
+                </tr>
+            </thead>
+            <tbody>
+                {% for region, categories in sales_by_region_category.items() %}
+                    <tr>
+                        <td>{{ region }}</td>
+                        {% for category in sales_by_category.keys() %}
+                            <td>${{ categories.get(category, 0) | round(2) }}</td>
+                        {% endfor %}
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </section>
+</body>
+</html>
